@@ -163,6 +163,102 @@ void quickSort(int arr[], int beg, int end)
     }
 }
 
+
+
+void minMaxSort(int arr[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        int m = i;
+        int k = i;
+        for (int j = i + 1; j < len; j++)
+        {
+            if (arr[j] < arr[m])
+            {
+                m = j;
+            }
+            if (arr[j] > arr[k])
+            {
+                k = j;
+            }
+        }
+        int tmp = arr[m];
+        arr[m] = arr[i];
+        arr[i] = tmp;
+
+        tmp = arr[k];
+        arr[k] = arr[len - 1];
+        arr[len - 1] = tmp;
+    }
+}
+
+void insertionSort2(int arr[], int beg, int end)
+{
+    int j = 0;
+    int temp = arr[0];
+    for (int i = beg; i < end; i++)
+    {
+        j = i;
+        temp = arr[j];
+        j--;
+        while (j >= 0 && temp < arr[j])
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = temp;
+    }
+    return;
+}
+
+int help2(int beg, int end, int arr[])
+{
+    int x = beg;
+    int y = end;
+    int tmp;
+    int j = arr[x++];
+    while (x <= y)
+    {
+        while (arr[x] < j)
+            x++;
+        while (arr[y] > j)
+            y--;
+        if (x <= y)
+        {
+            tmp = arr[x];
+            arr[x] = arr[y];
+            arr[y] = tmp;
+            x++;
+            y--;
+        }
+    }
+    arr[beg] = arr[y];
+    arr[y] = j;
+    return y;
+}
+void timSort(int arr[], int beg, int end)
+
+{
+    int m = help2(beg, end, arr);
+    if (m - 1 < 100)
+    {
+        insertionSort2(arr, beg, m - 1);
+    }
+    else
+    {
+        timSort(arr, beg, m - 1);
+    }
+
+    if (end - m + 1 < 100)
+    {
+        insertionSort2(arr, m + 1, end);
+    }
+    else
+    {
+        timSort(arr, m + 1, end);
+    }
+}
+
 void averageTime(int caseNum)
 {
     int totalDuration = 0;
@@ -183,6 +279,12 @@ void averageTime(int caseNum)
             break;
         case 3:
             mergeSort(arr, 0, 10000);
+            break;
+        case 4:
+            minMaxSort(arr, 10000);
+            break;
+        case 5:
+            timSort(arr, 0, 10000);
         }
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
@@ -192,13 +294,12 @@ void averageTime(int caseNum)
     cout << "average sorting time: " << totalDuration / 5 << "\n"
          << endl;
 }
-
 int main()
 {
     srand(time(NULL));
-
+    // cout<<"********************** Part A ***********************"<<endl;
     // cout<<"testing insertioin sort"<<endl;
-    // int *arr = makeArray(NULL, 100);
+    int *arr = makeArray(100);
     // cout<<"before sorting:"<<endl;
     // printArray(arr, 100);
     // insertionSort(arr, 100);
@@ -207,7 +308,7 @@ int main()
     // delete [] arr;
 
     // cout<<"testing selection sort"<<endl;
-    // arr = makeArray(NULL, 100);
+    // arr = makeArray(100);
     // cout<<"before sorting:"<<endl;
     // printArray(arr, 100);
     // selectionSort(arr, 100, 100);
@@ -216,7 +317,7 @@ int main()
     // delete [] arr;
 
     // cout<<"testing quick sort"<<endl;
-    // arr = makeArray(NULL, 100);
+    // arr = makeArray(100);
     // cout<<"before sorting:"<<endl;
     // printArray(arr, 100);
     // quickSort(arr, 0, 100);
@@ -225,7 +326,7 @@ int main()
     // delete [] arr;
 
     // cout<<"testing merge sort"<<endl;
-    // arr = makeArray(NULL, 100);
+    // arr = makeArray(100);
     // cout<<"before sorting:"<<endl;
     // printArray(arr, 100);
     // mergeSort(arr, 0, 100);
@@ -233,16 +334,39 @@ int main()
     // printArray(arr, 100);
     // delete [] arr;
 
-    // cout << "timing for insertion sort: " << endl;
-    // averageTime(0);
-    // cout << "timing for selection sort: " << endl;
-    // averageTime(1);
-    // cout << "timing for quick sort: " << endl;
-    // averageTime(2);
-    // cout << "timing for merge sort: " << endl;
-    // averageTime(3);
+    cout<<"********************** Part B ***********************"<<endl;
+    cout << "timing for insertion sort: " << endl;
+    averageTime(0);
+    cout << "timing for selection sort: " << endl;
+    averageTime(1);
+    cout << "timing for quick sort: " << endl;
+    averageTime(2);
+    cout << "timing for merge sort: " << endl;
+    averageTime(3);
 
-    
+    cout<<"********************** Part C ***********************"<<endl;
+    cout<<"testing min max sort"<<endl;
+    arr = makeArray(100);
+    cout<<"before sorting:"<<endl;
+    printArray(arr, 100);
+    minMaxSort(arr, 100);
+    cout<<"after sorting:"<<endl;
+    printArray(arr, 100);
+    delete [] arr;
+
+    cout << "testing time sort" << endl;
+    arr = makeArray(1000);
+    cout << "before sorting:" << endl;
+    printArray(arr, 100);
+    timSort(arr, 0, 100);
+    cout << "after sorting:" << endl;
+    printArray(arr, 100);
+    delete[] arr;
+
+    cout << "timing for min max sort: " << endl;
+    averageTime(4);
+    cout << "timing for tim sort: " << endl;
+    averageTime(5);
 
     return 0;
 }
