@@ -1,7 +1,10 @@
 #include <iostream>
+#include <time.h>
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 
-int *makeArray(int *arr, int size)
+int *makeArray(int size)
 {
     int *newArr = new int[size];
     //original array?
@@ -10,6 +13,7 @@ int *makeArray(int *arr, int size)
     {
         newArr[i] = rand() % 100;
     }
+    return newArr;
 }
 
 void printArray(int *arr, int size)
@@ -17,8 +21,9 @@ void printArray(int *arr, int size)
     cout << "printing array: ";
     for (int i = 0; i < size; i++)
     {
-        cout << arr[i] << ", " << endl;
+        cout << arr[i] << ", ";
     }
+    cout << endl;
 }
 
 void insertionSort(int arr[], int length)
@@ -58,17 +63,6 @@ void selectionSort(int arr[], int len, int loops)
     }
 }
 
-void mergeSort(int arr[], int l1, int l2)
-{
-    int k;
-    if (l1 < l2)
-    {
-        k = (l1 + l2) / 2;
-        mergeSort(arr, l1, k);
-        mergeSort(arr, k + 1, l2);
-        merge(arr, l1, k, l2);
-    }
-}
 void merge(int arr[], int le, int m, int r)
 { // the helper function for the above sorting algorithm
     int i, j, k;
@@ -118,6 +112,18 @@ void merge(int arr[], int le, int m, int r)
     }
 }
 
+void mergeSort(int arr[], int l1, int l2)
+{
+    int k;
+    if (l1 < l2)
+    {
+        k = (l1 + l2) / 2;
+        mergeSort(arr, l1, k);
+        mergeSort(arr, k + 1, l2);
+        merge(arr, l1, k, l2);
+    }
+}
+
 int help(int beg, int end, int arr[])
 {
     int x = beg;
@@ -144,6 +150,7 @@ int help(int beg, int end, int arr[])
     return y;
 }
 void quickSort(int arr[], int beg, int end)
+
 {
     int m = help(beg, end, arr);
     if (m - 1 > beg)
@@ -156,7 +163,86 @@ void quickSort(int arr[], int beg, int end)
     }
 }
 
+void averageTime(int caseNum)
+{
+    int totalDuration = 0;
+    for (int i = 0; i < 5; i++)
+    {
+        int *arr = makeArray(10000);
+        auto start = high_resolution_clock::now();
+        switch (caseNum)
+        {
+        case 0:
+            insertionSort(arr, 10000);
+            break;
+        case 1:
+            selectionSort(arr, 10000, 10000);
+            break;
+        case 2:
+            quickSort(arr, 0, 10000);
+            break;
+        case 3:
+            mergeSort(arr, 0, 10000);
+        }
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+        cout << "time sorting one array: " << duration.count() << endl;
+        totalDuration += duration.count();
+    }
+    cout << "average sorting time: " << totalDuration / 5 << "\n"
+         << endl;
+}
+
 int main()
 {
+    srand(time(NULL));
+
+    // cout<<"testing insertioin sort"<<endl;
+    // int *arr = makeArray(NULL, 100);
+    // cout<<"before sorting:"<<endl;
+    // printArray(arr, 100);
+    // insertionSort(arr, 100);
+    // cout<<"after sorting:"<<endl;
+    // printArray(arr, 100);
+    // delete [] arr;
+
+    // cout<<"testing selection sort"<<endl;
+    // arr = makeArray(NULL, 100);
+    // cout<<"before sorting:"<<endl;
+    // printArray(arr, 100);
+    // selectionSort(arr, 100, 100);
+    // cout<<"after sorting:"<<endl;
+    // printArray(arr, 100);
+    // delete [] arr;
+
+    // cout<<"testing quick sort"<<endl;
+    // arr = makeArray(NULL, 100);
+    // cout<<"before sorting:"<<endl;
+    // printArray(arr, 100);
+    // quickSort(arr, 0, 100);
+    // cout<<"after sorting:"<<endl;
+    // printArray(arr, 100);
+    // delete [] arr;
+
+    // cout<<"testing merge sort"<<endl;
+    // arr = makeArray(NULL, 100);
+    // cout<<"before sorting:"<<endl;
+    // printArray(arr, 100);
+    // mergeSort(arr, 0, 100);
+    // cout<<"after sorting:"<<endl;
+    // printArray(arr, 100);
+    // delete [] arr;
+
+    // cout << "timing for insertion sort: " << endl;
+    // averageTime(0);
+    // cout << "timing for selection sort: " << endl;
+    // averageTime(1);
+    // cout << "timing for quick sort: " << endl;
+    // averageTime(2);
+    // cout << "timing for merge sort: " << endl;
+    // averageTime(3);
+
+    
+
     return 0;
 }
