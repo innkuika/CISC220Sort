@@ -297,42 +297,42 @@ void averageTime(int caseNum)
 int main()
 {
     srand(time(NULL));
-    // cout<<"********************** Part A ***********************"<<endl;
-    // cout<<"testing insertioin sort"<<endl;
+    cout<<"********************** Part A ***********************"<<endl;
+    cout<<"testing insertioin sort"<<endl;
     int *arr = makeArray(100);
-    // cout<<"before sorting:"<<endl;
-    // printArray(arr, 100);
-    // insertionSort(arr, 100);
-    // cout<<"after sorting:"<<endl;
-    // printArray(arr, 100);
-    // delete [] arr;
+    cout<<"before sorting:"<<endl;
+    printArray(arr, 100);
+    insertionSort(arr, 100);
+    cout<<"after sorting:"<<endl;
+    printArray(arr, 100);
+    delete [] arr;
 
-    // cout<<"testing selection sort"<<endl;
-    // arr = makeArray(100);
-    // cout<<"before sorting:"<<endl;
-    // printArray(arr, 100);
-    // selectionSort(arr, 100, 100);
-    // cout<<"after sorting:"<<endl;
-    // printArray(arr, 100);
-    // delete [] arr;
+    cout<<"testing selection sort"<<endl;
+    arr = makeArray(100);
+    cout<<"before sorting:"<<endl;
+    printArray(arr, 100);
+    selectionSort(arr, 100, 100);
+    cout<<"after sorting:"<<endl;
+    printArray(arr, 100);
+    delete [] arr;
 
-    // cout<<"testing quick sort"<<endl;
-    // arr = makeArray(100);
-    // cout<<"before sorting:"<<endl;
-    // printArray(arr, 100);
-    // quickSort(arr, 0, 100);
-    // cout<<"after sorting:"<<endl;
-    // printArray(arr, 100);
-    // delete [] arr;
+    cout<<"testing quick sort"<<endl;
+    arr = makeArray(100);
+    cout<<"before sorting:"<<endl;
+    printArray(arr, 100);
+    quickSort(arr, 0, 100);
+    cout<<"after sorting:"<<endl;
+    printArray(arr, 100);
+    delete [] arr;
 
-    // cout<<"testing merge sort"<<endl;
-    // arr = makeArray(100);
-    // cout<<"before sorting:"<<endl;
-    // printArray(arr, 100);
-    // mergeSort(arr, 0, 100);
-    // cout<<"after sorting:"<<endl;
-    // printArray(arr, 100);
-    // delete [] arr;
+    cout<<"testing merge sort"<<endl;
+    arr = makeArray(100);
+    cout<<"before sorting:"<<endl;
+    printArray(arr, 100);
+    mergeSort(arr, 0, 100);
+    cout<<"after sorting:"<<endl;
+    printArray(arr, 100);
+    delete [] arr;
 
     cout<<"********************** Part B ***********************"<<endl;
     cout << "timing for insertion sort: " << endl;
