@@ -363,7 +363,7 @@ int main()
     printArray(arr, 100);
     delete[] arr;
 
-    cout << "timing for min max sort: " << endl;
+    cout << "timing for : " << endl;
     averageTime(4);
     cout << "timing for tim sort: " << endl;
     averageTime(5);
