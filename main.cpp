@@ -5,6 +5,12 @@ using namespace std;
 using namespace std::chrono;
 
 int *makeArray(int size)
+/* Parameter: int
+ *
+ * Return: an int pointer to array
+ *
+ * This method is used to create an arraya and select random number between 0 and 100.
+ */
 {
     int *newArr = new int[size];
     //original array?
@@ -17,6 +23,12 @@ int *makeArray(int size)
 }
 
 void printArray(int *arr, int size)
+/* Parameter: an int pointer to the array, int
+ *
+ * Return: None
+ *
+ * This method is used to print out the array.
+ */
 {
     cout << "printing array: ";
     for (int i = 0; i < size; i++)
@@ -27,6 +39,14 @@ void printArray(int *arr, int size)
 }
 
 void insertionSort(int arr[], int length)
+/* Parameter: an array, an int
+ *
+ * Return: None.
+ *
+ * This method is used to sort the array using the insertionSort. InsertionSort sorted array is
+ * built having one item at a time. The array elements are compared with each other sequentially
+ * and then arranged simultaneously in some particular order.
+ */
 {
     int j = 0;
     int temp = arr[0];
@@ -46,6 +66,14 @@ void insertionSort(int arr[], int length)
 }
 
 void selectionSort(int arr[], int len, int loops)
+/* Parameter: an array, int, int
+ *
+ * Return: None.
+ *
+ * This method is used to sort array using selectionSort.  SelectionSort repeatedly finding the
+ * minimum element (considering ascending order) from unsorted part and putting it at the beginning.
+ * The algorithm maintains two subarrays in a given array.
+ */
 {
     for (int i = 0; i < loops; i++)
     {
@@ -64,6 +92,12 @@ void selectionSort(int arr[], int len, int loops)
 }
 
 void merge(int arr[], int le, int m, int r)
+/* Parameter: an array, int, int, int
+ *
+ * Return: None.
+ *
+ * This function is used to merge two different halves.
+ */
 { // the helper function for the above sorting algorithm
     int i, j, k;
     int lenL = m - le + 1;
@@ -113,6 +147,12 @@ void merge(int arr[], int le, int m, int r)
 }
 
 void mergeSort(int arr[], int l1, int l2)
+/* Parameter: array, int, int
+ *
+ * Return: None.
+ *
+ * This function is used to call the mergefunction to sort the array.
+ */
 {
     int k;
     if (l1 < l2)
@@ -166,6 +206,15 @@ void quickSort(int arr[], int beg, int end)
 
 
 void minMaxSort(int arr[], int len)
+/* Parameter: an array, int
+ *
+ * Return: None.
+ *
+ * This method works on the minimum and maximum element of the array. It finds the
+ * minimum and maximum element from the array and set on the first and last position
+ * of the array. Then the array index increment from the first position and
+ * decrement from the last position to get the new array.
+ */
 {
     for (int i = 0; i < len; i++)
     {
@@ -237,6 +286,17 @@ int help2(int beg, int end, int arr[])
     return y;
 }
 void timSort(int arr[], int beg, int end)
+/* Parameter:a string pointer
+ *
+ * Return: None.
+ *
+ * This method is used to  take advantage of runs of consecutive ordered elements
+ * that already exist in most real-world data, natural runs. It iterates over the data
+ * collecting elements into runs and simultaneously putting those runs in a stack.
+ * Whenever the runs on the top of the stack match a merge criterion, they are merged together.
+ * This goes on until all data is traversed; then, all runs are merged two at a time
+ * and only one sorted run remains.
+ */
 
 {
     int m = help2(beg, end, arr);
@@ -260,6 +320,12 @@ void timSort(int arr[], int beg, int end)
 }
 
 void averageTime(int caseNum)
+/* Parameter: int
+ *
+ * Return: None.
+ *
+ * This function is used to calculate the average running time for each kind of sort method.
+ */
 {
     int totalDuration = 0;
     for (int i = 0; i < 5; i++)
